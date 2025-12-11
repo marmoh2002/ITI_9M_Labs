@@ -1,0 +1,26 @@
+.center-nav {
+    text-align: center;
+
+}
+
+.center-nav ul {
+    list-style-position: inside;
+}
+
+.img {
+    width: 40%;
+}
+
+.small-img {
+    width: 20%;
+}
+
+
+.header-right {
+    text-align: right;
+}
+
+
+#nav li {
+    color: rgb(77, 208, 48);
+}

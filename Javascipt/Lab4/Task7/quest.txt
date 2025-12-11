@@ -1,0 +1,7 @@
+HTML5 validation vs custom validation:
+
+HTML5 validation (like required attribute and type="email") prevents form submission because the browser handles it natively. The browser checks these constraints before the form data is sent and blocks the submission if validation fails.
+
+Custom JavaScript validation using event listeners (like our blur events for name and password matching) runs separately from the form submission process. We're just showing error messages and changing styles, but we never actually told the form to stop submitting. To prevent submission with custom validation, we would need to add an event listener to the form's submit event and call event.preventDefault() when our custom validations fail.
+
+Basically HTML5 validation is built into how forms work, but our JS code just runs alongside the form without actually controlling whether it submits or not.

@@ -1,0 +1,37 @@
+/* add basic styling to the page: 0 */
+body {
+    font-family: Arial, sans-serif;
+    margin: 50px;
+    padding: 20px;
+    background-color: #ffffff;
+}
+
+#para {
+    padding: 15px;
+    border: 1px solid #ccc;
+    background-color: #e7e9e0a5;
+    margin-bottom: 20px;
+}
+
+table {
+    font-family: courier, sans-serif;
+    border-collapse: collapse;
+    border: 1px solid #ddd;
+    width: 100%;
+    background-color: #fff;
+    overflow: hidden;
+}
+
+th,
+td {
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #ede9e9a3;
+}
+
+tr:last-child {
+    background-color: #d8d3c78b;
+}
