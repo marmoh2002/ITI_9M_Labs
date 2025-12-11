@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>lab 4 - task 9</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h1>innerText vs textContent</h1>
+
+    <div class="demo-box" id="example">
+        <p>This is visible text.</p>
+        <span class="hidden">This text is hidden with CSS.</span>
+        <p>More visible text with extra spaces.</p>
+    </div>
+
+    <button id="btn-innerText">Get innerText</button>
+    <button id="btn-textContent">Get textContent</button>
+
+    <h3>Result:</h3>
+    <div class="results" id="output">Click a button to see the result</div>
+    <h2>Summary:</h2>
+    <p>both should display the raw html tags as text, not render them as bold</p>
+    <ul>
+
+        <li> <b>textContent</b> returns everything including the hidden span
+            innerText ignores elements with display:none </li>
+
+        <li> <b>textContent</b> keeps all the whitespace as-is
+            <b>innerText</b> kind of normalizes it like how the browser renders it
+        </li>
+
+        <li> <b>textContent</b> is supposedly faster because it doesnt care about
+            styling or layout stuff</li>
+
+        <li> <b>innerText</b> wont work on elements that arent rendered at all</li>
+
+    </ul>
+    <script src="script.js"></script>
+</body>
+
+</html>

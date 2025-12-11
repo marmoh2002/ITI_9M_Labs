@@ -9,16 +9,16 @@ body {
 #para {
     padding: 15px;
     border: 1px solid #ccc;
-    background-color: #e7e9e0a5;
+    background-color: #e8e8e8;
     margin-bottom: 20px;
 }
 
 table {
     font-family: courier, sans-serif;
     border-collapse: collapse;
-    border: 1px solid #ddd;
+    border: 1px solid #333;
     width: 100%;
-    background-color: #fff;
+    background-color: #f5f5f5;
     overflow: hidden;
 }
 
