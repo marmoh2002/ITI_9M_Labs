@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 2</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <h2>Click the button to open a new window with a typing effect!</h2>
+    <button id="btn" onclick="openTypingWindow()">Open Typing Window</button>
+
+    <script>
+        function openTypingWindow() {
+            const typingWin = window.open('win.html', 'typingDemo', 'width=650,height=250,left=200,top=200,resizable=yes');
+            typingWin.focus(); // bring it to front
+        }
+    </script>
+</body>
+
+</html>
