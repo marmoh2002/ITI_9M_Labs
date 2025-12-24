@@ -1,0 +1,151 @@
+Project requirements:
+using the provided topics only
+you are a beginner JS student(use only vanilla JS)
+it is required you make a login that we land in, it consists of a form with username and password fields and submit button and a signup hyperlink underneath the login submit button (use cookies)
+such that if the user entered a new username and password that are not present in cookies, a new cookie is set up and user is redirected to a new page where he signs up with username and password and a sign up button
+once sign up is complete, redirect the user to go back and log in again
+check on username and password using regular expressions and so on (username string of length > 3, password contains at least 1 uppercase letter and at least 1 symbol and 1 number and length more than 8 etc), if password or username are not acceptable, make a warning appear on screen in place and remove it once criteria is met, and prevent submission until it is resolved.
+upon successful login, the user is redirected to a homepage
+now i want to make the homepage of my website and i need to pick an API, suppose it is on animal breeds(suggest topics)?
+i want the homepage to contain a large slider on top that moves on its own using setInterval and underneath it some cards each card displays a topic and upon click on any card user is redirected to card topic's details page
+there is a back button in that last page to redirect back to homepage
+
+here are some of my instructor's suggested apis: 
+https://dummyjson.com/ 
+https://jsonplaceholder.typicode.com/
+https://github.com/public-apis/public-apis
+
+topics: 
+
+### 1. Core Fundamentals (`index1.js`)
+
+* **Variables & Scope:**
+* `var`, `let`, `const`.
+* Variable Declaration vs. Initialization.
+* Scope types: Global, Function, Block, and Lexical scope.
+* **Hoisting:** Variable hoisting and the "Temporal Dead Zone" (TDZ).
+
+
+* **Data Types:**
+* Primitives: `String`, `Number`, `Boolean`, `Undefined`, `Null`.
+* Checking types with `typeof`.
+* Type Coercion (Implicit conversion).
+* Explicit Conversion: `parseInt()`, `parseFloat()`, `Number()`, `String()`.
+
+
+* **Operators:**
+* Arithmetic (`+`, `-`, `*`, `++`, `--`).
+* Comparison: Loose (`==`) vs. Strict (`===`).
+* Logical: `&&` (AND), `||` (OR), `!` (NOT).
+* Bitwise: `&`, `|`.
+* Ternary Operator (`condition ? true : false`).
+
+
+* **Control Flow:**
+* Conditionals: `if`, `else`, `switch` statements.
+* Loops: `for`, `while`, `do-while`.
+
+
+* **Functions:**
+* Function Statements (Declarations).
+* Function Expressions.
+* **Arrow Functions** (ES6 syntax).
+* **IIFE** (Immediately Invoked Function Expressions).
+* Callback Functions.
+
+
+
+### 2. Data Structures & Manipulation (`index2.js`, `index3.js`)
+
+* **Arrays:**
+* Creation: `[]` vs `new Array()`.
+* Basic Methods: `push`, `pop`, `shift`, `unshift`.
+* Manipulation: `splice`, `slice`, `reverse`, `join`, `concat`, `flat`.
+* Sorting: `sort()` with custom compare functions.
+* **High-Order Methods:** `map`, `filter`, `reduce`, `find`, `some`, `every`.
+
+
+* **Objects:**
+* Object Literals vs. `new Object()`.
+* Dot notation (`obj.key`) vs. Bracket notation (`obj['key']`).
+* Object Methods: `Object.keys()`, `Object.values()`, `Object.entries()`.
+* Shorthand method syntax in ES6.
+
+
+* **Strings:**
+* Methods: `indexOf`, `lastIndexOf`, `substring`, `slice`, `replace`, `split`.
+
+
+* **Numbers & Math:**
+* `toFixed()`, `toPrecision()`.
+* `Math` Object: `Math.max`, `Math.min`, `Math.round`, `Math.floor`, `Math.ceil`, `Math.random`, `Math.pow`.
+* `BigInt`.
+
+
+* **Dates:**
+* `new Date()`, Getters (`getDate`, `getDay`, etc.), Setters, and Formatting.
+
+
+
+### 3. The DOM (Document Object Model) (`index4.js`)
+
+* **Selection:**
+* `getElementById`, `getElementsByClassName`, `getElementsByTagName`.
+* `querySelector`, `querySelectorAll`.
+
+
+* **Manipulation:**
+* Changing content: `innerText`, `innerHTML`.
+* Changing styles: `element.style.property`.
+* Classes: `classList.add`, `remove`, `toggle`.
+* Attributes: `setAttribute`.
+
+
+* **DOM Tree:**
+* Traversing: `children`, `childNodes`, `parentElement`.
+* Creation: `createElement`, `appendChild`.
+* Deletion: `remove`, `removeChild`.
+
+
+* **Events:**
+* Event Listeners: `addEventListener`.
+* Event Object (`e`).
+* **Propagation:** Bubbling vs. Capturing (`stopPropagation`).
+* Preventing defaults (`e.preventDefault`).
+
+
+
+### 4. The BOM (Browser Object Model) & APIs (`index5.js`)
+
+* **Window Object:**
+* `window.open()`, `window.close()`, `window.moveTo()`.
+* `screen`, `location` (redirects/reloads), `history`, `navigator`.
+
+
+* **Timers:**
+* `setTimeout`, `clearTimeout`.
+* `setInterval`, `clearInterval`.
+
+
+* **Storage:**
+* **Cookies:** Creating, reading, and setting expiration dates.
+
+
+* **AJAX & Networking:**
+* **JSON:** `JSON.parse()`, `JSON.stringify()`.
+* **XMLHttpRequest:** Making async GET requests.
+* Handling states: `readyState`, `status` (200, 404, etc.).
+
+
+
+### 5. Advanced Concepts
+
+* **Regular Expressions (RegEx):**
+* Patterns, Modifiers (`g`, `i`, `m`), and methods (`test`, `match`, `exec`).
+
+
+* **Error Handling:**
+* `try...catch...finally` blocks.
+* `throw` new Error.
+* Error Types (`ReferenceError`, `TypeError`, `SyntaxError`).
+

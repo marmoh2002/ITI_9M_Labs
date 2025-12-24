@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products Showcase</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .user-info {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: white;
+        }
+
+        .logout-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid white;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        .logout-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .slider-container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 30px auto;
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            height: 400px;
+        }
+
+        .slider {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+            height: 100%;
+        }
+
+        .slide {
+            min-width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .slide-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+            color: white;
+            padding: 30px;
+        }
+
+        .slide-info h2 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .slide-info p {
+            font-size: 16px;
+        }
+
+        .slider-nav {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 10;
+        }
+
+        .slider-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .slider-dot.active {
+            background: white;
+        }
+
+        .products-container {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 0 20px;
+        }
+
+        .products-title {
+            text-align: center;
+            font-size: 32px;
+            color: #333;
+            margin-bottom: 40px;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .product-card-body {
+            padding: 20px;
+        }
+
+        .product-card h3 {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .product-card p {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 15px;
+            height: 40px;
+            overflow: hidden;
+        }
+
+        .product-card .price {
+            font-size: 20px;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 50px;
+            font-size: 20px;
+            color: #666;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="user-info">
+            <span id="welcomeUser"></span>
+            <button class="logout-btn" onclick="logout()">Logout</button>
+        </div>
+        <h1>Welcome to Our Product Showcase</h1>
+    </header>
+
+    <div class="slider-container">
+        <div class="slider" id="slider"></div>
+        <div class="slider-nav" id="sliderNav"></div>
+    </div>
+
+    <div class="products-container">
+        <h2 class="products-title">Featured Products</h2>
+        <div class="products-grid" id="productsGrid">
+            <div class="loading">Loading products...</div>
+        </div>
+    </div>
+
+    <script>
+        // Cookie functions
+        function getCookie(name) {
+            const nameEQ = name + "=";
+            const ca = document.cookie.split(';');
+            for (let i = 0; i < ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) === ' ') c = c.substring(1);
+                if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+            }
+            return null;
+        }
+
+        function deleteCookie(name) {
+            document.cookie = name + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+        }
+
+        // Check if user is logged in
+        const currentUser = getCookie('currentUser');
+        if (!currentUser) {
+            alert('Please login first');
+            window.location.href = 'login.html';
+        } else {
+            document.getElementById('welcomeUser').textContent = 'Hello, ' + currentUser;
+        }
+
+        // Logout function
+        function logout() {
+            deleteCookie('currentUser');
+            alert('Logged out successfully');
+            window.location.href = 'login.html';
+        }
+
+        // Fetch products from API
+        let allProducts = [];
+        const xhr = new XMLHttpRequest();
+
+        xhr.open('GET', 'https://dummyjson.com/products?limit=20', true);
+
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                    const response = JSON.parse(xhr.responseText);
+                    allProducts = response.products;
+
+                    // Setup slider with first 5 products
+                    setupSlider(allProducts.slice(0, 5));
+
+                    // Display all products as cards
+                    displayProducts(allProducts);
+                } else {
+                    document.getElementById('productsGrid').innerHTML =
+                        '<div class="loading">Error loading products. Please try again later.</div>';
+                }
+            }
+        };
+
+        xhr.send();
+
+        // Setup slider
+        function setupSlider(products) {
+            const slider = document.getElementById('slider');
+            const sliderNav = document.getElementById('sliderNav');
+
+            // Create slides
+            products.forEach((product, index) => {
+                const slide = document.createElement('div');
+                slide.className = 'slide';
+                slide.innerHTML = `
+                    <img src="${product.thumbnail}" alt="${product.title}">
+                    <div class="slide-info">
+                        <h2>${product.title}</h2>
+                        <p>${product.description}</p>
+                    </div>
+                `;
+                slider.appendChild(slide);
+
+                // Create navigation dots
+                const dot = document.createElement('div');
+                dot.className = 'slider-dot' + (index === 0 ? ' active' : '');
+                dot.onclick = () => goToSlide(index);
+                sliderNav.appendChild(dot);
+            });
+
+            // Auto-slide functionality
+            let currentSlide = 0;
+            const totalSlides = products.length;
+
+            function nextSlide() {
+                currentSlide = (currentSlide + 1) % totalSlides;
+                updateSlider();
+            }
+
+            function goToSlide(index) {
+                currentSlide = index;
+                updateSlider();
+            }
+
+            function updateSlider() {
+                slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+
+                // Update dots
+                const dots = document.querySelectorAll('.slider-dot');
+                dots.forEach((dot, index) => {
+                    if (index === currentSlide) {
+                        dot.classList.add('active');
+                    } else {
+                        dot.classList.remove('active');
+                    }
+                });
+            }
+
+            // Auto-slide every 4 seconds
+            setInterval(nextSlide, 4000);
+        }
+
+        // Display products as cards
+        function displayProducts(products) {
+            const productsGrid = document.getElementById('productsGrid');
+            productsGrid.innerHTML = '';
+
+            products.forEach(product => {
+                const card = document.createElement('div');
+                card.className = 'product-card';
+                card.onclick = () => {
+                    window.location.href = `details.html?id=${product.id}`;
+                };
+
+                card.innerHTML = `
+                    <img src="${product.thumbnail}" alt="${product.title}">
+                    <div class="product-card-body">
+                        <h3>${product.title}</h3>
+                        <p>${product.description}</p>
+                        <div class="price">$${product.price}</div>
+                    </div>
+                `;
+
+                productsGrid.appendChild(card);
+            });
+        }
+    </script>
+</body>
+
+</html>

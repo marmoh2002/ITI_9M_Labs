@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Login</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h2>Login</h2>
+    <form id="loginForm">
+        <input type="text" id="username" placeholder="Username" required><br><br>
+        <input type="password" id="password" placeholder="Password" required><br>
+        <div id="errorMsg" class="error"></div><br>
+        <button type="submit">Login</button>
+    </form>
+    <a href="signup.html">Sign Up New Account</a>
+
+    <script src="auth.js"></script>
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function (e) {
+            // TOPIC 3: Preventing Defaults
+            e.preventDefault();
+
+            const user = document.getElementById('username').value;
+            const pass = document.getElementById('password').value;
+            const errorDiv = document.getElementById('errorMsg');
+
+            if (validateInputs(user, pass, errorDiv)) {
+                // Check Cookies
+                const storedUser = getCookie("username");
+                const storedPass = getCookie("password");
+
+                // TOPIC 1: Comparison Operators
+                if (user === storedUser && pass === storedPass) {
+                    alert("Login Successful!");
+                    window.location.href = "home.html"; // TOPIC 4: Window Location
+                } else {
+                    errorDiv.innerText = "User not found or wrong password. Please Sign Up.";
+                    errorDiv.style.display = "block";
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

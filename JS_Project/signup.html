@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h2>Sign Up</h2>
+    <form id="signupForm">
+        <input type="text" id="newUsername" placeholder="Create Username" required><br><br>
+        <input type="password" id="newPassword" placeholder="Create Password" required><br>
+        <div id="signupError" class="error"></div><br>
+        <button type="submit">Create Account</button>
+    </form>
+
+    <script src="auth.js"></script>
+    <script>
+        document.getElementById('signupForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const user = document.getElementById('newUsername').value;
+            const pass = document.getElementById('newPassword').value;
+            const errorDiv = document.getElementById('signupError');
+
+            if (validateInputs(user, pass, errorDiv)) {
+                // Save to Cookies
+                setCookie("username", user, 7);
+                setCookie("password", pass, 7);
+                alert("Signup Complete! Please log in.");
+                window.location.href = "login.html";
+            }
+        });
+    </script>
+</body>
+
+</html>
