@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab 4 - Task 4</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <p id="para">lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et
+        dolore magna aliqua.</p>
+
+    <table border="1">
+        <tr>
+            <th>fontFamily</th>
+            <th>textAlign</th>
+            <th>lineHeight</th>
+            <th>letterSpacing</th>
+            <th>textIndent</th>
+            <th>textTransform</th>
+            <th>textDecoration</th>
+        </tr>
+        <tr valign="top">
+            <td>
+                <input type="radio" name="font" onclick="changeFontFamily('arial')" checked> arial<br>
+                <input type="radio" name="font" onclick="changeFontFamily('courier')"> courier<br>
+                <input type="radio" name="font" onclick="changeFontFamily('georgia')"> georgia<br>
+                <input type="radio" name="font" onclick="changeFontFamily('impact')"> impact<br>
+                <input type="radio" name="font" onclick="changeFontFamily('times new roman')"> times new roman<br>
+                <input type="radio" name="font" onclick="changeFontFamily('verdana')"> verdana
+            </td>
+            <td>
+                <input type="radio" name="align" onclick="changeTextAlign('left')" checked> left<br>
+                <input type="radio" name="align" onclick="changeTextAlign('center')"> center<br>
+                <input type="radio" name="align" onclick="changeTextAlign('right')"> right<br>
+                <input type="radio" name="align" onclick="changeTextAlign('justify')"> justify
+            </td>
+            <td>
+                <input type="radio" name="lheight" onclick="changeLineHeight('normal')" checked> normal<br>
+                <input type="radio" name="lheight" onclick="changeLineHeight('10px')"> 10px<br>
+                <input type="radio" name="lheight" onclick="changeLineHeight('15px')"> 15px<br>
+                <input type="radio" name="lheight" onclick="changeLineHeight('1.5')"> 1.5
+            </td>
+            <td>
+                <input type="radio" name="lspace" onclick="changeLetterSpacing('normal')" checked> normal<br>
+                <input type="radio" name="lspace" onclick="changeLetterSpacing('-1px')"> -1px<br>
+                <input type="radio" name="lspace" onclick="changeLetterSpacing('2px')"> 2px<br>
+                <input type="radio" name="lspace" onclick="changeLetterSpacing('3px')"> 3px
+            </td>
+            <td>
+                <input type="radio" name="indent" onclick="changeTextIndent('0px')" checked> 0px<br>
+                <input type="radio" name="indent" onclick="changeTextIndent('5px')"> 5px<br>
+                <input type="radio" name="indent" onclick="changeTextIndent('15px')"> 15px<br>
+                <input type="radio" name="indent" onclick="changeTextIndent('25px')"> 25px
+            </td>
+            <td>
+                <input type="radio" name="transform" onclick="changeTextTransform('none')" checked> none<br>
+                <input type="radio" name="transform" onclick="changeTextTransform('capitalize')"> capitalize<br>
+                <input type="radio" name="transform" onclick="changeTextTransform('uppercase')"> uppercase<br>
+                <input type="radio" name="transform" onclick="changeTextTransform('lowercase')"> lowercase
+            </td>
+            <td>
+                <input type="radio" name="decor" onclick="changeTextDecoration('none')" checked> none<br>
+                <input type="radio" name="decor" onclick="changeTextDecoration('line-through')"> line-through<br>
+                <input type="radio" name="decor" onclick="changeTextDecoration('overline')"> overline<br>
+                <input type="radio" name="decor" onclick="changeTextDecoration('underline')"> underline
+            </td>
+        </tr>
+    </table>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

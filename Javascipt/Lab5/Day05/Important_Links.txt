@@ -1,0 +1,13 @@
+MDN --> https://developer.mozilla.org/en-US/
+
+problem_solving --> https://www.jschallenger.com/
+
+JS_Interview Qns --> 
+             -- https://github.com/sudheerj/javascript-interview-questions
+             -- https://github.com/lydiahallie/javascript-questions
+APIS --> 
+         -- https://dummyjson.com/
+         -- https://jsonplaceholder.typicode.com/
+         -- https://github.com/public-apis/public-apis
+
+Advanced_Level -->  https://drive.google.com/file/d/1mg4kVfVg8OqB9sMNu0aZg2vYpqJIV5fL/view?usp=sharing
