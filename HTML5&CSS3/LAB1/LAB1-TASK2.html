@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab 1 - Task 2</title>
+    <style>
+        #lineCanvas {
+            border: 1px solid #ccc;
+            width: 300px;
+            height: 300px;
+            display: block;
+            margin: 20px auto;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Right-Angled Triangle</h1>
+
+    <svg width="300" height="300" style="border: 1px solid #ccc;">
+        <polygon points="250,10 120,250 250,250" fill="red" stroke="black" stroke-width="2" />
+        <text x="175" y="270" text-anchor="middle">a</text>
+        <text x="265" y="150" text-anchor="middle">b</text>
+        <text x="155" y="150" text-anchor="middle">c</text>
+    </svg>
+    <h2>
+        according to pythagoras theorem:
+    </h2>
+    <math>
+        <mi>c</mi>
+        <mo>=</mo>
+        <msqrt>
+            <msup>
+                <mi>a</mi>
+                <mn>2</mn>
+            </msup>
+            <mo>+</mo>
+            <msup>
+                <mi>b</mi>
+                <mn>2</mn>
+            </msup>
+        </msqrt>
+    </math>
+    <h1>
+        Semicircle Toggling
+    </h1>
+    <svg>
+        <path d="M 50 100 A 48 48 0 0 1 146 100 Z" id="hcircle" fill="yellow" stroke="black" stroke-width="2" />
+    </svg>
+
+    <h1>Line Animation</h1>
+    <canvas id="lineCanvas"></canvas>
+    <script>
+        const path = document.getElementById('hcircle');
+
+        // Upward semicircle (sweep-flag = 1)
+        const upPath = "M 50 100 A 48 48 0 0 1 146 100 Z";
+        // Downward semicircle (sweep-flag = 0)
+        const downPath = "M 50 100 A 48 48 0 0 0 146 100 Z";
+        // Full circle (two arcs)
+        const fullCircle = "M 50 100 A 48 48 0 0 1 146 100 A 48 48 0 0 1 50 100 Z";
+
+        let isUp = true;
+        let toggleCount = 0;
+
+        function toggle() {
+            if (toggleCount >= 10) {
+                // Show full circle after 10 toggles
+                path.setAttribute('d', fullCircle);
+
+                return;
+            }
+
+            // Toggle direction
+            isUp = !isUp;
+            path.setAttribute('d', isUp ? upPath : downPath);
+            toggleCount++;
+
+            // Schedule next toggle
+            setTimeout(toggle, 500);
+        }
+
+        // Auto-start when page loads
+        window.onload = function () {
+            setTimeout(toggle, 500);
+        };
+        const canvas = document.getElementById('lineCanvas');
+        const ctx = canvas.getContext('2d');
+
+        // Set canvas to full window size
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        // Animation variables
+        let progress = 0;
+        const animationSpeed = 0.01; // Adjust speed here
+        const startX = 0;
+        const startY = 0;
+        const endX = canvas.width;
+        const endY = canvas.height;
+
+        function drawLine() {
+            // Clear canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Calculate current end point based on progress
+            const currentX = startX + (endX - startX) * progress;
+            const currentY = startY + (endY - startY) * progress;
+
+            // Draw the line
+            ctx.beginPath();
+            ctx.moveTo(startX, startY);
+            ctx.lineTo(currentX, currentY);
+            ctx.strokeStyle = '#8B0000'; // Dark red color
+            ctx.lineWidth = 5;
+            ctx.lineCap = 'round';
+            ctx.stroke();
+
+            // Update progress
+            progress += animationSpeed;
+
+            // Check if animation is complete
+            if (progress >= 1) {
+                // Draw final line
+                ctx.beginPath();
+                ctx.moveTo(startX, startY);
+                ctx.lineTo(endX, endY);
+                ctx.stroke();
+
+                // Show alert when animation ends
+                alert('animation end');
+            } else {
+                // Continue animation
+                requestAnimationFrame(drawLine);
+            }
+        }
+
+        // Start the animation
+        drawLine();
+
+        // Handle window resize
+        window.addEventListener('resize', function () {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+    </script>
+</body>
+
+
+</html>
