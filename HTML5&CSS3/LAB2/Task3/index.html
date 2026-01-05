@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 3: Worker Threads</title>
+    <style>
+        h1 {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+            font-weight: bold;
+            font-family: cursive;
+            color: #ff0019;
+        }
+
+        body {
+            padding: 20px;
+        }
+
+
+
+        #button-div {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            font-family: cursive;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #ff0019;
+            color: white;
+            transition: background-color 0.3s ease;
+            box-shadow: 0 4px 8px rgba(4, 3, 3, 0.1);
+        }
+
+        button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+
+        button:hover:not(:disabled) {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Task 3: Multiple Web Workers</h1>
+    <div id="button-div">
+        <button id="btn-calculate">Start Calculation</button>
+        <button id="btn-fetch-data">Fetch User Data</button>
+    </div>
+    <div id="output-container" style="margin-top: 20px; border: 1px solid #ccc; padding: 10px;">
+        Results will appear here...
+    </div>
+    <hr />
+
+    <script>
+        // 1. Initialize Workers
+        const mathWorker = new Worker("calcworker.js");
+        const networkWorker = new Worker("fetchworker.js");
+
+        // 2. Select DOM Elements
+        const calcButton = document.getElementById("btn-calculate");
+        const dataButton = document.getElementById("btn-fetch-data");
+        const resultsView = document.getElementById("output-container");
+
+        // --- Calculation Logic ---
+
+        calcButton.onclick = () => {
+            resultsView.innerHTML = "Processing heavy calculation...";
+            // Send a message to start the worker
+            mathWorker.postMessage("start");
+        };
+
+        mathWorker.onmessage = (messageEvent) => {
+            const result = messageEvent.data;
+            alert(`Math finished! Result: ${result}`);
+            resultsView.innerHTML = `<strong>Final Sum:</strong> ${result}`;
+        };
+
+        // --- Fetch Logic ---
+
+        dataButton.onclick = () => {
+            resultsView.innerHTML = "Contacting API...";
+            // Send a message to start the worker
+            networkWorker.postMessage("start");
+        };
+
+        networkWorker.onmessage = (messageEvent) => {
+            const userList = messageEvent.data;
+
+            let htmlContent = "<h3>Received Users:</h3>";
+
+            // Loop through data and build HTML string
+            userList.forEach(user => {
+                htmlContent += `<p><strong>${user.name}</strong> — ${user.email}</p>`;
+            });
+
+            resultsView.innerHTML = htmlContent;
+        };
+
+    </script>
+</body>
+
+</html>
