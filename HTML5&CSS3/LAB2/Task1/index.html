@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 1: Map with Live Location Map</title>
+    <style>
+        h1 {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+            font-weight: bold;
+            font-family: cursive;
+            color: #ff0019;
+        }
+
+        body {
+            padding: 20px;
+        }
+
+        .map-container {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        iframe {
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+
+        #button-div {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            font-family: cursive;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #ff0019;
+            color: white;
+            transition: background-color 0.3s ease;
+            box-shadow: 0 4px 8px rgba(4, 3, 3, 0.1);
+        }
+
+        button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+
+        button:hover:not(:disabled) {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Live Location with Embedded Map</h1>
+    <div id="button-div">
+        <button id="btn-start">Start Live Tracking</button>
+        <button id="btn-stop" disabled>Stop Tracking</button>
+    </div>
+    <div class="map-container">
+        <iframe id="google-map-frame" width="600" height="450"></iframe>
+    </div>
+    <hr />
+
+    <script>
+        // 1. Rename global variable to be more descriptive
+        let locationWatchId = null;
+
+        // Select DOM elements
+        const startButton = document.getElementById('btn-start');
+        const stopButton = document.getElementById('btn-stop');
+        const mapIframe = document.getElementById("google-map-frame");
+
+        // 2. Refactored 'startTracking' -> 'initiateTracking'
+        const initiateTracking = () => {
+            if (navigator.geolocation) {
+
+                // Toggle button states for better UX
+                startButton.disabled = true;
+                stopButton.disabled = false;
+
+                const geoOptions = {
+                    enableHighAccuracy: true,
+                    timeout: 5000,
+                    maximumAge: 0
+                };
+
+                // Using the renamed callback functions
+                locationWatchId = navigator.geolocation.watchPosition(updateMapPosition, handleGeoError, geoOptions);
+
+            } else {
+                alert("Geolocation is not supported by this browser.");
+            }
+        };
+
+        // 3. Refactored 'stopTracking' -> 'terminateTracking'
+        const terminateTracking = () => {
+            if (locationWatchId) {
+                navigator.geolocation.clearWatch(locationWatchId);
+                locationWatchId = null; // Reset ID
+
+                // Toggle buttons back
+                startButton.disabled = false;
+                stopButton.disabled = true;
+
+                alert("Live tracking has been stopped.");
+            }
+        };
+
+        // 4. Refactored 'showPos' -> 'updateMapPosition'
+        const updateMapPosition = (positionData) => {
+            // Destructuring for cleaner variable assignment
+            const { latitude, longitude } = positionData.coords;
+
+            // Use Template Literals (backticks) for cleaner string interpolation
+            // Note: Switched to standard Google Maps embed query format for reliability
+            const generatedMapUrl = "https://maps.google.com/maps?q=" + latitude + "," + longitude + "&z=15&output=embed";
+
+            mapIframe.src = generatedMapUrl;
+            console.log(`Updated Location: ${latitude}, ${longitude}`);
+        };
+
+        // 5. Refactored 'showError' -> 'handleGeoError'
+        const handleGeoError = (errorInfo) => {
+            // Using constants makes the switch case more readable than magic numbers (1, 2, 3)
+            switch (errorInfo.code) {
+                case errorInfo.PERMISSION_DENIED:
+                    console.error("User denied the request for Geolocation.");
+                    break;
+                case errorInfo.POSITION_UNAVAILABLE:
+                    console.error("Location information is unavailable.");
+                    break;
+                case errorInfo.TIMEOUT:
+                    console.error("The request to get user location timed out.");
+                    break;
+                case errorInfo.UNKNOWN_ERROR:
+                    console.error("An unknown error occurred.");
+                    break;
+            }
+        };
+
+        // Add Event Listeners (Separation of Concerns)
+        startButton.addEventListener('click', initiateTracking);
+        stopButton.addEventListener('click', terminateTracking);
+
+    </script>
+</body>
+
+</html>
