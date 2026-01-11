@@ -31,11 +31,12 @@ void quickSort(int arr[], int low, int high)
 void printArray(int arr[], int size)
 {
     for (int i = 0; i < size; i++)
-        cout << arr[i] << " ";
+        cout << arr[i] << ",\t";
     cout << endl;
 }
 int main()
 {
+    cout << "Quick Sort:" << endl;
     int arr[] = {10, 7, 8, 9, 10, 5};
     int n = sizeof(arr) / sizeof(arr[0]);
     cout << "Original array: \n";

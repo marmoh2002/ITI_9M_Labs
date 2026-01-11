@@ -21,11 +21,12 @@ void bubbleSort(int arr[], int n)
 void printArray(int arr[], int size)
 {
     for (int i = 0; i < size; i++)
-        cout << arr[i] << " ";
+        cout << arr[i] << ",\t";
     cout << endl;
 }
 int main()
 {
+    cout<<"Bubble Sort:"<<endl;
     int arr[] = {64, 34, 25, 12, 22, 11, 90};
     int n = sizeof(arr) / sizeof(arr[0]);
     cout <<"original array: \n";
