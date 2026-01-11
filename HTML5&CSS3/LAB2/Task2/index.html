@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 2: Simple User List</title>
+    <style>
+        h1 {
+            font-family: cursive;
+        }
+
+        #registration-view {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        input {
+            padding: 10px;
+            font-size: 16px;
+            font-family: cursive;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            font-family: cursive;
+            max-width: 400px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            font-family: cursive;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: red;
+            color: white;
+            transition: background-color 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #table-view {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            font-family: cursive;
+        }
+
+        th {
+            background-color: red;
+            /* Dark grey */
+            color: white;
+            text-align: left;
+            padding: 12px 15px;
+        }
+
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #ddd;
+            color: #333;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        td button {
+            background-color: #dc3546be;
+            /* Red */
+            margin: 0;
+            padding: 6px 12px;
+            font-size: 14px;
+        }
+
+        td button:hover {
+            background-color: #c82333;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="registration-view">
+        <form>
+            <h1>User Registration</h1>
+            <label>Name</label>
+            <input type="text" id="input-name" placeholder="Enter Name" />
+            <label>Job</label>
+            <input type="text" id="input-job" placeholder="Enter Job" />
+
+            <button id="btn-add">Submit User</button>
+        </form>
+    </div>
+
+    <div id="table-view" style="display: none;">
+        <h1>All Users</h1>
+        <table border="2">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Job</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="table-body"></tbody>
+        </table>
+        <br />
+        <button id="btn-back">Back to Form</button>
+    </div>
+
+
+    <script>
+        // 1. Select Elements
+        const btnAdd = document.getElementById("btn-add");
+        const btnBack = document.getElementById("btn-back");
+        const viewForm = document.getElementById("registration-view");
+        const viewTable = document.getElementById("table-view");
+        const tableBody = document.getElementById("table-body");
+
+        // 2. Add User Logic
+
+        btnAdd.onclick = function (e) {
+
+            // PREVENT RELOAD: Stop the form from refreshing the page
+            e.preventDefault();
+
+            let nameValue = document.getElementById("input-name").value;
+            let jobValue = document.getElementById("input-job").value;
+
+            // VALIDATION: Check if empty
+            if (nameValue === "" || jobValue === "") {
+                alert("Please fill in both Name and Job fields");
+                return; // Stop the function here, do not save
+            }
+
+            // Create the object
+            let newUser = {
+                userName: nameValue,
+                userJob: jobValue
+            };
+
+            // Get existing list or create empty one
+            let database = JSON.parse(localStorage.getItem("myUserList")) || [];
+
+            // Add to list and save
+            database.push(newUser);
+            localStorage.setItem("myUserList", JSON.stringify(database));
+
+            // Update cookie
+            document.cookie = `totalUsers=${database.length};path=/`;
+
+            // Clear inputs for next time (Optional but good UX)
+            document.getElementById("input-name").value = "";
+            document.getElementById("input-job").value = "";
+
+            showTable();
+        };
+
+        // 3. Show Table Logic (Standard Loop)
+        function showTable() {
+            // Switch views
+            viewForm.style.display = "none";
+            viewTable.style.display = "block";
+
+            // Clear old rows
+            tableBody.innerHTML = "";
+
+            // Fetch data
+            let database = JSON.parse(localStorage.getItem("myUserList")) || [];
+
+            // Simple FOR loop
+            for (let i = 0; i < database.length; i++) {
+                tableBody.innerHTML += `
+                <tr>
+                    <td>${database[i].userName}</td>
+                    <td>${database[i].userJob}</td>
+                    <td><button onclick="deleteUser(${i})">Delete</button></td>
+                </tr>
+            `;
+            }
+        }
+
+        // 4. Delete Logic
+        function deleteUser(index) {
+            let database = JSON.parse(localStorage.getItem("myUserList"));
+
+            // Remove 1 item at the specific index
+            database.splice(index, 1);
+
+            localStorage.setItem("myUserList", JSON.stringify(database));
+
+            document.cookie = `totalUsers=${database.length};path=/`;
+
+            // Refresh the table to show changes
+            showTable();
+        }
+
+        // 5. Back Button Logic
+        btnBack.onclick = function () {
+            viewTable.style.display = "none";
+            viewForm.style.display = "block"; // Changed to block to respect your toggle logic
+            // Note: Since your CSS for #registration-view uses flex, 
+            // setting it to 'block' via JS might mess up alignment slightly.
+            // A better fix is setting it back to 'flex':
+            viewForm.style.display = "flex";
+        };
+
+    </script>
+</body>
+
+</html>

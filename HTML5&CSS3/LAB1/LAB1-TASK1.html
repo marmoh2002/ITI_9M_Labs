@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        button {
+            margin-top: 10px;
+            color: black;
+            background-color: white;
+            border: 1px solid black;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+
+        h1 {
+            margin-bottom: 10px;
+            font-family: courier, monospace;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Custom Video Controls</h1>
+    <!-- regular video functionality -->
+    <video src="./video/frozen.mp4" width="100%" poster="./image/frozen.jpg" id="vid"></video>
+    <div>
+        <div>
+            <button id="playPauseBtn">Play</button>
+            <button id="largeseekback">
+                <<< </button>
+                    <button id="smallseekback">
+                        < </button>
+                            <button id="smallseekforward"> > </button>
+                            <button id="largeseekforward">>></button>
+
+                            <input type="range" id="videoRange" min="0" max="100" value="0" step="1">
+                            <span id="timeDisplay">0:00 / 0:00</span>
+                            <button id="mute-btn">Mute</button>
+
+        </div>
+        <div>
+            <label id="speedLabel">Speed:</label>
+            <input type="range" id="speedRange" min="0.5" max="2" value="1" step="0.1" default="1">
+            <span id="speedDisplay">1x</span>
+        </div>
+    </div>
+
+
+    <script>
+        const video = document.getElementById('vid');
+        const range = document.getElementById('videoRange');
+        const timeDisplay = document.getElementById('timeDisplay');
+
+        video.addEventListener('loadedmetadata', () => {
+            range.max = video.duration;
+        });
+
+        range.addEventListener('input', (e) => {
+            video.currentTime = e.target.value;
+        });
+
+        video.addEventListener('timeupdate', () => {
+            range.value = video.currentTime;
+            const current = formatTime(video.currentTime);
+            const duration = formatTime(video.duration);
+            timeDisplay.textContent = `${current} / ${duration}`;
+        });
+
+        function formatTime(seconds) {
+            const mins = Math.floor(seconds / 60);
+            const secs = Math.floor(seconds % 60);
+            return `${mins}:${secs.toString().padStart(2, '0')}`;
+        }
+        play_btn = document.getElementById('playPauseBtn');
+        play_btn.addEventListener('click', () => {
+            if (video.paused) {
+                video.play();
+                play_btn.textContent = 'Pause';
+            } else {
+                video.pause();
+                play_btn.textContent = 'Play ';
+            }
+        });
+        const muteBtn = document.getElementById('mute-btn');
+        muteBtn.addEventListener('click', () => {
+            video.muted = !video.muted;
+            muteBtn.textContent = video.muted ? 'Unmute' : 'Mute';
+        });
+        const speedRange = document.getElementById('speedRange');
+        const speedDisplay = document.getElementById('speedDisplay');
+        speedRange.addEventListener('input', () => {
+            video.playbackRate = speedRange.value;
+            speedDisplay.textContent = `${speedRange.value}x`;
+        });
+
+
+    </script>
+
+    <hr>
+
+</body>
+
+</html>
