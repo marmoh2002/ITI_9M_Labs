@@ -56,13 +56,13 @@ int main()
 {
     Node *root = nullptr;
 
-    root = insert(root, 50);
-    insert(root, 30);
-    insert(root, 70);
-    insert(root, 20);
-    insert(root, 40);
-    insert(root, 60);
-    insert(root, 80);
+    root = insert(root, 1);
+    insert(root, 2);
+    insert(root, 3);
+    insert(root, 4);
+    insert(root, 5);
+    insert(root, 6);
+    insert(root, 7);
 
     cout << "Inorder: ";
     inorder(root);
