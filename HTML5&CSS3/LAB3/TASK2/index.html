@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Only Form Validation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="form-container">
+        <h2>Registration</h2>
+        <form>
+            <div class="input-group">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" name="name" placeholder=" " pattern="^[A-Z][a-zA-Z\s]{3,}$" required
+                    autocomplete="off">
+                <span class="error-message">
+                    First letter must be uppercase, >3 characters, no numbers.
+                </span>
+            </div>
+
+            <div class="input-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" placeholder=" " required>
+                <span class="error-message">
+                    Please enter a valid email address.
+                </span>
+            </div>
+
+            <button type="submit">Submit Form</button>
+        </form>
+    </div>
+
+</body>
+
+</html>

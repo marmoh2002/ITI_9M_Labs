@@ -1,0 +1,21 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #6749a8;
+    margin: 0;
+}
+
+.fade-img {
+    width: 700px;
+    transition: opacity 1s ease-in-out;
+    opacity: 1;
+    display: block;
+    margin: auto;
+
+}
+
+.fade-img:hover {
+    opacity: 0.1;
+}
