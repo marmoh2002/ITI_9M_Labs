@@ -50,8 +50,6 @@ const user = {
     }
 };
 
-// Testing User Profile
-console.log("=== User Profile Demo ===");
 console.log(`Name: ${user.name}`);
 console.log(`Age: ${user.age}`);
 console.log(`Full Address: ${user.getFullAddress()}`);
@@ -73,15 +71,12 @@ function createUser(name, age, street, city) {
     };
 }
 
-// Array of User Profile Objects
 const users = [
     createUser("Ahmed Ali", 28, "14 farid St", "Cairo"),
     createUser("Walid Samir", 35, "21 Khaled St", "Alexandria"),
     createUser("Lobna Youssef", 42, "54 Nile St", "Fayoum")
 ];
 
-
-// Testing Array of Users
 console.log("=== Users Array Demo ===");
 users.forEach((user, index) => {
     console.log(`User ${index + 1}:`);
