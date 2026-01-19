@@ -1,7 +1,7 @@
 // ===========================
 // part two:
 // ===========================
-console.log("\n--- PART TWO ---");
+console.log("\npart two\n");
 
 const createEmployee = (name, age, dept, salary) => {
     let _salary = salary;
