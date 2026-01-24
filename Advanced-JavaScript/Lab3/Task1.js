@@ -30,6 +30,9 @@ function Rect(_color, _width, _height) {
 // Inheritance
 Rect.prototype = Object.create(Shape.prototype);
 Rect.prototype.constructor = Rect;
+Rect.prototype.printColor = function () {
+    console.log(`Rect Color: ${this.color}`);
+};
 
 // Static Members
 Rect.count = 0;
@@ -59,6 +62,9 @@ function Square(_color, _side) {
 // Inheritance from Rect
 Square.prototype = Object.create(Rect.prototype);
 Square.prototype.constructor = Square;
+Square.prototype.printColor = function () {
+    console.log(`Square Color: ${this.color}`);
+};
 
 // Static Members
 Square.count = 0;
