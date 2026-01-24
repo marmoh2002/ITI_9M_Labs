@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Country Data Lab</title>
+    <style>
+        .container {
+            display: flex;
+            gap: 20px;
+            /* Space between cards */
+            justify-content: center;
+            padding: 50px;
+            font-family: Arial, sans-serif;
+        }
+
+        .country-card {
+            width: 300px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            text-align: left;
+            padding-bottom: 20px;
+        }
+
+        .country-img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+
+        .data-row {
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 16px;
+            color: #555;
+        }
+
+        .country-name {
+            font-size: 28px;
+            font-weight: bold;
+            color: #333;
+            margin: 20px 20px 5px;
+        }
+
+        .region {
+            margin: 0 20px 20px;
+            color: #888;
+            font-size: 14px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* Specific style for the neighbor card mentioned in Lab3 [cite: 19] */
+        .neighbour {
+            opacity: 0.8;
+            transform: scale(0.95);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container"></div>
+
+    <script src="lab3.js"></script>
+</body>
+
+</html>
