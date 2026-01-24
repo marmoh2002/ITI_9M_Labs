@@ -1,4 +1,4 @@
-import Shape from "../Shape.js";
+import Shape from "../Part1/Shape.js";
 
 export default class Circle extends Shape {
     #radius;
