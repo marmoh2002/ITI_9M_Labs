@@ -16,6 +16,7 @@ A comprehensive web application for managing student affairs data including stud
 - **CRUD Operations** - Create, Read, Update, Delete records for all entities
 - **Search Functionality** - Real-time search across all data
 - **Sorting** - Click column headers to sort data (ascending/descending)
+- **State Persistence** - Automatically saves the user's current context (active tab, page number, search query, and sort order) to localStorage. If the page is refreshed or reopened, the application restores the exact state where the user left off.
 - **Pagination** - Navigate through data with customizable page sizes
 - **Responsive Design** - Modern, clean UI that works on all devices
 - **Modular Architecture** - ES6 modules for maintainable code
@@ -196,6 +197,7 @@ Example: `http://localhost:3000/students?_page=1&_limit=10&_sort=name&_order=asc
 - Orchestrates all components
 - Event handling
 - Data flow management
+- State management
 
 ## Error Handling
 
