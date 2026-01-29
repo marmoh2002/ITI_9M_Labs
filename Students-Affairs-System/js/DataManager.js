@@ -225,7 +225,28 @@ export class DataManager {
             'Are you sure you want to delete this record?',
             async () => {
                 try {
+                    // Store current state
+                    const currentPage = this.paginationController.getCurrentPage();
+                    const pageSize = this.paginationController.getPageSize();
+
                     await this.apiService.delete(this.currentEntity, id);
+
+                    // Check if we need to adjust the page after deletion
+                    // If we deleted the last item on a page, go to previous page
+                    const params = { _page: currentPage, _limit: pageSize };
+                    if (this.currentSearch) params.q = this.currentSearch;
+                    if (this.currentSort.field) {
+                        params._sort = this.currentSort.field;
+                        params._order = this.currentSort.order;
+                    }
+
+                    const result = await this.apiService.getAll(this.currentEntity, params);
+
+                    // If current page is empty and we're not on page 1, go to previous page
+                    if (result.data.length === 0 && currentPage > 1) {
+                        this.paginationController.currentPage = currentPage - 1;
+                    }
+
                     await this.loadData();
                 } catch (error) {
                     console.error('Error deleting record:', error);
@@ -242,6 +263,8 @@ export class DataManager {
     async handleAdd(formData) {
         try {
             await this.apiService.create(this.currentEntity, formData);
+            // Stay on current entity, but reset to first page to see the new record
+            this.paginationController.currentPage = 1;
             await this.loadData();
         } catch (error) {
             console.error('Error creating record:', error);
@@ -256,6 +279,7 @@ export class DataManager {
     async handleUpdate(formData) {
         try {
             await this.apiService.update(this.currentEntity, formData.id, formData);
+            // Reload data on the same entity and same page
             await this.loadData();
         } catch (error) {
             console.error('Error updating record:', error);

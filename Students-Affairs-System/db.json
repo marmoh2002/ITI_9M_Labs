@@ -82,22 +82,13 @@
       "enrollmentDate": "2020-09-01"
     },
     {
-      "id": 10,
-      "name": "Lisa Garcia",
+      "name": "Lisa Garcia2",
       "email": "lisa.garcia@university.edu",
       "age": 19,
       "major": "Art History",
       "gpa": 3.63,
-      "enrollmentDate": "2023-09-01"
-    },
-    {
-      "name": "MArioums",
-      "email": "mhabiefc@gmail.com",
-      "age": 43,
-      "major": "CS",
-      "gpa": 4,
-      "enrollmentDate": "2024-12-04",
-      "id": 11
+      "enrollmentDate": "2023-09-01",
+      "id": 10
     }
   ],
   "courses": [
@@ -109,15 +100,6 @@
       "department": "Computer Science",
       "description": "Fundamentals of programming using Python",
       "semester": "Fall"
-    },
-    {
-      "id": 2,
-      "code": "MATH201",
-      "name": "Calculus II",
-      "credits": 4,
-      "department": "Mathematics",
-      "description": "Advanced calculus topics including integration and series",
-      "semester": "Spring"
     },
     {
       "id": 3,
@@ -231,15 +213,6 @@
     }
   ],
   "employees": [
-    {
-      "id": 1,
-      "name": "Airi Satou",
-      "position": "Accountant",
-      "office": "Tokyo",
-      "age": 33,
-      "startDate": "2008-11-28",
-      "salary": 162700
-    },
     {
       "id": 2,
       "name": "Angelica Ramos",
