@@ -1,0 +1,21 @@
+{
+    "name": "students-affairs-system",
+    "version": "1.0.0",
+    "description": "A simple student affairs management system using vanilla JavaScript and json-server",
+    "main": "index.html",
+    "scripts": {
+        "server": "json-server --watch db.json --port 3000",
+        "start": "json-server --watch db.json --port 3000"
+    },
+    "keywords": [
+        "javascript",
+        "crud",
+        "json-server",
+        "students"
+    ],
+    "author": "",
+    "license": "MIT",
+    "devDependencies": {
+        "json-server": "^0.17.4"
+    }
+}
