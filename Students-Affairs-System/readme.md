@@ -9,7 +9,10 @@ A learning project demonstrating:
 A comprehensive web application for managing student affairs data including students, courses, instructors, and employees. Built with vanilla JavaScript ES6 modules and json-server as a mock backend.
 
 ## Preview
-![Students Affairs System Preview](preview.gif)
+<video width="100%" controls>
+   <source src="./video/video_tut.mp4" type="video/mp4">
+   Your browser does not support the video tag.
+</video>
 
 ## Features
 
