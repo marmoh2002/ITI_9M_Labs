@@ -9,9 +9,14 @@ import { SearchController } from './SearchController.js';
 export class DataManager {
     constructor() {
         this.apiService = new ApiService();
+
+        // Default state
         this.currentEntity = 'students';
         this.currentSort = { field: null, order: 'asc' };
         this.currentSearch = '';
+
+        // State persistence key
+        this.stateKey = 'sas_app_state';
 
         // Initialize components
         this.initializeComponents();
@@ -52,9 +57,13 @@ export class DataManager {
             document.getElementById('searchInput')
         );
 
-        // Initialize components
-        this.paginationController.init((page) => this.loadData());
+        // Initialize components callbacks
+        this.paginationController.init((page) => {
+            this.loadData();
+        });
+
         this.formHandler.init();
+
         this.searchController.init((query) => {
             this.currentSearch = query;
             this.paginationController.currentPage = 1; // Reset to first page on search
@@ -69,11 +78,10 @@ export class DataManager {
         // Tab buttons
         document.querySelectorAll('.tab-btn').forEach(btn => {
             btn.addEventListener('click', () => {
-                this.switchEntity(btn.dataset.entity);
-
-                // Update active tab
-                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
+                // Only switch if it's a different entity
+                if (this.currentEntity !== btn.dataset.entity) {
+                    this.switchEntity(btn.dataset.entity);
+                }
             });
         });
 
@@ -116,6 +124,61 @@ export class DataManager {
     }
 
     /**
+     * Save current application state to LocalStorage
+     */
+    saveState() {
+        const state = {
+            entity: this.currentEntity,
+            page: this.paginationController.getCurrentPage(),
+            limit: this.paginationController.getPageSize(),
+            sort: this.currentSort,
+            search: this.currentSearch
+        };
+        localStorage.setItem(this.stateKey, JSON.stringify(state));
+    }
+
+    /**
+     * Restore application state from LocalStorage
+     */
+    restoreState() {
+        const saved = localStorage.getItem(this.stateKey);
+        if (!saved) return;
+
+        try {
+            const state = JSON.parse(saved);
+
+            // Restore Entity
+            if (state.entity) this.currentEntity = state.entity;
+
+            // Restore Search
+            if (state.search) {
+                this.currentSearch = state.search;
+                if (this.searchController && this.searchController.searchInput) {
+                    this.searchController.searchInput.value = state.search;
+                }
+            }
+
+            // Restore Sort
+            if (state.sort) this.currentSort = state.sort;
+
+            // Restore Pagination settings
+            if (state.limit) {
+                this.paginationController.pageSize = state.limit;
+                // Update the dropdown UI to match
+                const entriesSelect = document.getElementById('entriesPerPage');
+                if (entriesSelect) entriesSelect.value = state.limit;
+            }
+            if (state.page) {
+                this.paginationController.currentPage = state.page;
+            }
+
+        } catch (error) {
+            console.error('Error restoring state:', error);
+            // Fallback to defaults if error
+        }
+    }
+
+    /**
      * Switch to different entity
      * @param {string} entity - Entity name
      */
@@ -133,6 +196,7 @@ export class DataManager {
      */
     async loadData() {
         try {
+            // console.log('Loading data for entity:', this.currentEntity);
             this.tableRenderer.showLoading();
 
             // Build query parameters
@@ -173,6 +237,12 @@ export class DataManager {
                 this.paginationController.getCurrentPage(),
                 this.paginationController.getPageSize()
             );
+
+            // Ensure active tab is visually correct
+            this.syncActiveTab();
+
+            // SAVE STATE: Whenever data loads successfully, save the state
+            this.saveState();
 
         } catch (error) {
             console.error('Error loading data:', error);
@@ -225,6 +295,7 @@ export class DataManager {
             'Are you sure you want to delete this record?',
             async () => {
                 try {
+                    console.log('Deleting record from entity:', this.currentEntity);
                     // Store current state
                     const currentPage = this.paginationController.getCurrentPage();
                     const pageSize = this.paginationController.getPageSize();
@@ -235,11 +306,8 @@ export class DataManager {
                     // If we deleted the last item on a page, go to previous page
                     const params = { _page: currentPage, _limit: pageSize };
                     if (this.currentSearch) params.q = this.currentSearch;
-                    if (this.currentSort.field) {
-                        params._sort = this.currentSort.field;
-                        params._order = this.currentSort.order;
-                    }
 
+                    // Fetch current page data to check if it's empty
                     const result = await this.apiService.getAll(this.currentEntity, params);
 
                     // If current page is empty and we're not on page 1, go to previous page
@@ -247,6 +315,7 @@ export class DataManager {
                         this.paginationController.currentPage = currentPage - 1;
                     }
 
+                    console.log('Reloading data for entity:', this.currentEntity);
                     await this.loadData();
                 } catch (error) {
                     console.error('Error deleting record:', error);
@@ -278,8 +347,11 @@ export class DataManager {
      */
     async handleUpdate(formData) {
         try {
+            console.log('Updating record in entity:', this.currentEntity);
             await this.apiService.update(this.currentEntity, formData.id, formData);
             // Reload data on the same entity and same page
+            // The state (currentPage, currentEntity) is preserved in the class instance
+            console.log('Reloading data for entity:', this.currentEntity);
             await this.loadData();
         } catch (error) {
             console.error('Error updating record:', error);
@@ -322,6 +394,27 @@ export class DataManager {
      */
     init() {
         this.setupEventListeners();
+
+        // Restore state from LocalStorage before first load
+        this.restoreState();
+
+        this.syncActiveTab(); // Ensure active tab matches currentEntity
         this.loadData();
+    }
+
+    /**
+     * Sync the active tab visual state with currentEntity
+     */
+    syncActiveTab() {
+        // Remove active class from all tabs
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.classList.remove('active');
+        });
+
+        // Add active class to current entity tab
+        const activeTab = document.querySelector(`.tab-btn[data-entity="${this.currentEntity}"]`);
+        if (activeTab) {
+            activeTab.classList.add('active');
+        }
     }
 }

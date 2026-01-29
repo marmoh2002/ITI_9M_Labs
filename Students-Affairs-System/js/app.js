@@ -5,4 +5,8 @@ import { DataManager } from './DataManager.js';
 document.addEventListener('DOMContentLoaded', () => {
     const dataManager = new DataManager();
     dataManager.init();
+
+    // Expose to window for debugging (can be removed in production)
+    window.dataManager = dataManager;
+    console.log('DataManager initialized and exposed to window.dataManager for debugging');
 });

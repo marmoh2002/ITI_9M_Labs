@@ -26,6 +26,14 @@ export class PaginationController {
         this.elements.prevPageBtn.addEventListener('click', () => this.goToPage(this.currentPage - 1));
         this.elements.nextPageBtn.addEventListener('click', () => this.goToPage(this.currentPage + 1));
         this.elements.lastPageBtn.addEventListener('click', () => this.goToPage(this.totalPages));
+
+        // Use event delegation for page number buttons to avoid multiple listeners
+        this.elements.pageNumbers.addEventListener('click', (e) => {
+            if (e.target.classList.contains('page-number')) {
+                const page = parseInt(e.target.dataset.page);
+                this.goToPage(page);
+            }
+        });
     }
 
     /**
@@ -131,13 +139,8 @@ export class PaginationController {
 
         this.elements.pageNumbers.innerHTML = pageNumbersHTML;
 
-        // Add click listeners to page number buttons
-        this.elements.pageNumbers.querySelectorAll('.page-number').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const page = parseInt(btn.dataset.page);
-                this.goToPage(page);
-            });
-        });
+        // Note: Event listeners are now handled via event delegation in setupEventListeners()
+        // No need to add listeners here - this prevents multiple listeners being added
     }
 
     /**
