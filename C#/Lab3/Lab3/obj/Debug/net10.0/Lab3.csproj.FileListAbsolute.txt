@@ -1,0 +1,15 @@
+/home/mariam/Documents/repo/ITI_9M_Labs/C#/Lab3/Lab3/bin/Debug/net10.0/Lab3
+/home/mariam/Documents/repo/ITI_9M_Labs/C#/Lab3/Lab3/bin/Debug/net10.0/Lab3.deps.json
+/home/mariam/Documents/repo/ITI_9M_Labs/C#/Lab3/Lab3/bin/Debug/net10.0/Lab3.runtimeconfig.json
+/home/mariam/Documents/repo/ITI_9M_Labs/C#/Lab3/Lab3/bin/Debug/net10.0/Lab3.dll
+/home/mariam/Documents/repo/ITI_9M_Labs/C#/Lab3/Lab3/bin/Debug/net10.0/Lab3.pdb
+/home/mariam/Documents/repo/ITI_9M_Labs/C#/Lab3/Lab3/obj/Debug/net10.0/Lab3.GeneratedMSBuildEditorConfig.editorconfig
+/home/mariam/Documents/repo/ITI_9M_Labs/C#/Lab3/Lab3/obj/Debug/net10.0/Lab3.AssemblyInfoInputs.cache
+/home/mariam/Documents/repo/ITI_9M_Labs/C#/Lab3/Lab3/obj/Debug/net10.0/Lab3.AssemblyInfo.cs
+/home/mariam/Documents/repo/ITI_9M_Labs/C#/Lab3/Lab3/obj/Debug/net10.0/Lab3.csproj.CoreCompileInputs.cache
+/home/mariam/Documents/repo/ITI_9M_Labs/C#/Lab3/Lab3/obj/Debug/net10.0/Lab3.sourcelink.json
+/home/mariam/Documents/repo/ITI_9M_Labs/C#/Lab3/Lab3/obj/Debug/net10.0/Lab3.dll
+/home/mariam/Documents/repo/ITI_9M_Labs/C#/Lab3/Lab3/obj/Debug/net10.0/refint/Lab3.dll
+/home/mariam/Documents/repo/ITI_9M_Labs/C#/Lab3/Lab3/obj/Debug/net10.0/Lab3.pdb
+/home/mariam/Documents/repo/ITI_9M_Labs/C#/Lab3/Lab3/obj/Debug/net10.0/Lab3.genruntimeconfig.cache
+/home/mariam/Documents/repo/ITI_9M_Labs/C#/Lab3/Lab3/obj/Debug/net10.0/ref/Lab3.dll
