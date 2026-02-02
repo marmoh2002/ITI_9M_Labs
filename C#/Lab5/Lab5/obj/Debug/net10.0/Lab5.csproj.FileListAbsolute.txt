@@ -1,0 +1,15 @@
+/home/mariam/Documents/repo/ITI_9M_Labs/C#/Lab5/Lab5/bin/Debug/net10.0/Lab5
+/home/mariam/Documents/repo/ITI_9M_Labs/C#/Lab5/Lab5/bin/Debug/net10.0/Lab5.deps.json
+/home/mariam/Documents/repo/ITI_9M_Labs/C#/Lab5/Lab5/bin/Debug/net10.0/Lab5.runtimeconfig.json
+/home/mariam/Documents/repo/ITI_9M_Labs/C#/Lab5/Lab5/bin/Debug/net10.0/Lab5.dll
+/home/mariam/Documents/repo/ITI_9M_Labs/C#/Lab5/Lab5/bin/Debug/net10.0/Lab5.pdb
+/home/mariam/Documents/repo/ITI_9M_Labs/C#/Lab5/Lab5/obj/Debug/net10.0/Lab5.GeneratedMSBuildEditorConfig.editorconfig
+/home/mariam/Documents/repo/ITI_9M_Labs/C#/Lab5/Lab5/obj/Debug/net10.0/Lab5.AssemblyInfoInputs.cache
+/home/mariam/Documents/repo/ITI_9M_Labs/C#/Lab5/Lab5/obj/Debug/net10.0/Lab5.AssemblyInfo.cs
+/home/mariam/Documents/repo/ITI_9M_Labs/C#/Lab5/Lab5/obj/Debug/net10.0/Lab5.csproj.CoreCompileInputs.cache
+/home/mariam/Documents/repo/ITI_9M_Labs/C#/Lab5/Lab5/obj/Debug/net10.0/Lab5.sourcelink.json
+/home/mariam/Documents/repo/ITI_9M_Labs/C#/Lab5/Lab5/obj/Debug/net10.0/Lab5.dll
+/home/mariam/Documents/repo/ITI_9M_Labs/C#/Lab5/Lab5/obj/Debug/net10.0/refint/Lab5.dll
+/home/mariam/Documents/repo/ITI_9M_Labs/C#/Lab5/Lab5/obj/Debug/net10.0/Lab5.pdb
+/home/mariam/Documents/repo/ITI_9M_Labs/C#/Lab5/Lab5/obj/Debug/net10.0/Lab5.genruntimeconfig.cache
+/home/mariam/Documents/repo/ITI_9M_Labs/C#/Lab5/Lab5/obj/Debug/net10.0/ref/Lab5.dll
