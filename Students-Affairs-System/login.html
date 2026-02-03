@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Students Affairs System</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+
+<body>
+    <div class="login-container">
+        <div class="login-box">
+            <div class="login-header">
+                <h1>Students Affairs System</h1>
+                <p>Admin Login</p>
+            </div>
+
+            <form id="loginForm" class="login-form">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" required autofocus>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+
+                <div id="errorMessage" class="error-message"></div>
+
+                <button type="submit" class="btn-login">Login</button>
+            </form>
+
+            <div class="login-footer">
+                <p class="demo-credentials">
+                    <strong>Demo Credentials:</strong><br>
+                    Username: <code>admin</code><br>
+                    Password: <code>admin123</code>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        import { AuthService } from './js/AuthService.js';
+
+        const authService = new AuthService();
+        const loginForm = document.getElementById('loginForm');
+        const errorMessage = document.getElementById('errorMessage');
+
+        // Check if already logged in
+        if (authService.isAuthenticated()) {
+            authService.redirectToDashboard();
+        }
+
+        // Handle login form submission
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value;
+
+            // Clear previous error
+            errorMessage.textContent = '';
+            errorMessage.style.display = 'none';
+
+            // Attempt login
+            if (authService.login(username, password)) {
+                // Success - redirect to dashboard
+                authService.redirectToDashboard();
+            } else {
+                // Failed - show error
+                errorMessage.textContent = 'Invalid username or password';
+                errorMessage.style.display = 'block';
+
+                // Clear password field
+                document.getElementById('password').value = '';
+                document.getElementById('password').focus();
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -25,9 +25,42 @@ header {
     padding: 20px;
 }
 
+.header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
 header h1 {
     font-size: 24px;
-    margin-bottom: 15px;
+    margin: 0;
+}
+
+.user-controls {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.user-info {
+    font-size: 14px;
+    color: #ecf0f1;
+}
+
+.btn-logout {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+.btn-logout:hover {
+    background-color: #c0392b;
 }
 
 .tabs {
@@ -486,5 +519,16 @@ tbody tr:nth-child(even):hover {
 
     #searchInput {
         width: 100%;
+    }
+
+    .header-top {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .user-controls {
+        width: 100%;
+        justify-content: space-between;
     }
 }

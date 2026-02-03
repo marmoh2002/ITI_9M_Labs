@@ -4,14 +4,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Students Affairs System</title>
+    <title>Dashboard - Students Affairs System</title>
     <link rel="stylesheet" href="styles.css">
+
+    <!-- Authentication Check - Must be loaded first -->
+    <script type="module">
+        import { AuthService } from './js/AuthService.js';
+
+        const authService = new AuthService();
+
+        // Check authentication before page loads
+        if (!authService.isAuthenticated()) {
+            authService.redirectToLogin();
+        }
+    </script>
 </head>
 
 <body>
     <div class="container">
         <header>
-            <h1>Students Affairs System</h1>
+            <div class="header-top">
+                <h1>Students Affairs System</h1>
+                <div class="user-controls">
+                    <span id="userInfo" class="user-info"></span>
+                    <button id="logoutBtn" class="btn-logout">Logout</button>
+                </div>
+            </div>
             <nav class="tabs">
                 <button class="tab-btn active" data-entity="students">Students</button>
                 <button class="tab-btn" data-entity="courses">Courses</button>
@@ -105,6 +123,28 @@
     </div>
 
     <script type="module" src="./js/app.js"></script>
+
+    <!-- Logout Functionality -->
+    <script type="module">
+        import { AuthService } from './js/AuthService.js';
+
+        const authService = new AuthService();
+
+        // Display username
+        const userInfo = document.getElementById('userInfo');
+        const username = authService.getCurrentUsername();
+        if (username) {
+            userInfo.textContent = `Welcome, ${username}`;
+        }
+
+        // Logout button handler
+        document.getElementById('logoutBtn').addEventListener('click', () => {
+            if (confirm('Are you sure you want to logout?')) {
+                authService.logout();
+                authService.redirectToLogin();
+            }
+        });
+    </script>
 </body>
 
 </html>
