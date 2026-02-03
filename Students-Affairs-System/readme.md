@@ -1,351 +1,187 @@
-# Students Affairs System
-A learning project demonstrating:
-- ES6 modules
-- OOP principles
-- CRUD operations
-- REST API interaction
-- Modern JavaScript practices
+# Student Affairs System - With Admin Login
 
-A comprehensive web application for managing student affairs data including students, courses, instructors, and employees. Built with vanilla JavaScript ES6 modules and json-server as a mock backend.
+## Overview
 
-## Preview
-![Students Affairs System Screenshot](./video/video_tut_gif.gif)
+This is a complete Student Management System designed to demonstrate how to build a Single Page Application (SPA) using vanilla JavaScript. It features a full Create, Read, Update, and Delete (CRUD) workflow for managing students, courses, instructors, and employees.
+
+The project is strictly educational. It avoids modern frameworks (like React or Vue) to focus on core web development concepts, including ES6 modules, RESTful API integration, state management, and frontend routing.
+
+**Important:** This project includes a login system for demonstration purposes. It is **frontend-only** and is not secure for production use. Please read the Security Notes section for more details.
+
+---
+## DEMO
+
+![Demo GIF](./video/demo.gif)
+---
+
+---
+
+## Technology Stack
+
+**Frontend**
+
+* HTML5 & CSS3 (Responsive Design)
+* JavaScript (ES6+ Standards)
+* ES6 Modules (No build tools required)
+* Local & Session Storage APIs
+
+**Backend (Simulation)**
+
+* **json-server:** Acts as a mock REST API.
+* **Node.js:** Required to run the mock server.
+
+**Architecture**
+
+* Model-View-Controller (MVC) pattern.
+* Component-based structure with clear separation of concerns.
+
+---
 
 ## Features
 
-- **CRUD Operations** - Create, Read, Update, Delete records for all entities
-- **Search Functionality** - Real-time search across all data
-- **Sorting** - Click column headers to sort data (ascending/descending)
-- **State Persistence** - Automatically saves the user's current context (active tab, page number, search query, and sort order) to localStorage. If the page is refreshed or reopened, the application restores the exact state where the user left off.
-- **Pagination** - Navigate through data with customizable page sizes
-- **Responsive Design** - Modern, clean UI that works on all devices
-- **Modular Architecture** - ES6 modules for maintainable code
-- **OOP Design** - Class-based object-oriented programming
+* **Admin Dashboard:** A protected interface that requires a login session.
+* **Complete Management:** dedicated sections for Students, Courses, Instructors, and Employees.
+* **Search & Filtering:** Real-time search functionality across all data fields.
+* **Data Organization:** Clickable column headers for sorting and pagination controls for handling large datasets.
+* **State Persistence:** The application remembers your last view, search query, and page number even if you refresh the browser.
+* **Mock Authentication:** Uses `sessionStorage` to simulate a login session.
 
-## Technologies Used
+---
 
-- **HTML5** - Structure
-- **CSS3** - Styling
-- **JavaScript ES6** - Logic with modules (import/export)
-- **Fetch API** - HTTP requests
-- **json-server** - Fake server. Mocks REST API backend
+## Setup Instructions
 
-## Project Structure
+You will need **Node.js** installed on your computer to run the mock database. You will also need a basic web server to serve the HTML files (to support ES6 modules).
 
-```
-students-affairs-system/
-│
-├── index.html              # Main HTML file
-├── styles.css              # All styling
-├── db.json                 # JSON database file
-├── package.json            # NPM config
-│
-└── js/                     # JavaScript modules
-    ├── app.js              # Application entry point
-    ├── DataManager.js      # Main controller/coordinator
-    ├── ApiService.js       # API request handler
-    ├── EntityConfig.js     # Entity schemas config
-    ├── TableRenderer.js    # Table rendering logic
-    ├── PaginationController.js  # Pagination logic
-    ├── FormHandler.js      # Form operations
-    └── SearchController.js # Search functionality
-```
+### Step 1: Install the Mock Backend
 
-## Installation & Setup
-
-### Prerequisites
-
-- Node.js 
-- npm 
-
-### Step 1: Install Dependencies
+Open your terminal and install `json-server` globally. This tool allows us to use a simple JSON file as a database.
 
 ```bash
-npm install
+npm install -g json-server
 ```
 
-This will install `json-server` which provides the mock REST API.
+### Step 2: Start the Backend API
 
-### Step 2: Start the JSON Server
+Navigate to the project directory in your terminal and run the following command. This will watch the `db.json` file for changes.
 
 ```bash
-npm start
+json-server --watch db.json --port 3000
 ```
 
-This will start json-server on `http://localhost:3000`
+Keep this terminal window open. You can verify it is working by visiting `http://localhost:3000/students` in your browser.
 
+### Step 3: Start the Web Server
 
-### Step 3: Open the Application
+Open a **new** terminal window (do not close the previous one) and navigate to the project directory. You need to serve the files using a local web server. You can use Python, Node, or PHP.
 
-Open `index.html` in your web browser. 
+**Using Python (Recommended):**
 
-
-## Usage Guide
-
-### Managing Data
-
-#### View Records (UC-01)
-1. Click on any tab (Students, Courses, Instructors, Employees)
-2. Data will be displayed in a table format
-
-#### Add New Record (UC-02)
-1. Click the "Add New" button
-2. Fill in the form fields
-3. Click "Save"
-4. New record appears in the table
-
-#### Edit Record (UC-03)
-1. Click the "Edit" button on any row
-2. Modify the form fields
-3. Click "Save"
-4. Record is updated in the table
-
-#### Delete Record (UC-04)
-1. Click the "Delete" button on any row
-2. Confirm the deletion in the dialog
-3. Record is removed from the table
-
-#### Search Records (UC-06)
-1. Type keywords in the search box
-2. Results are filtered automatically (500ms debounce)
-3. Search works across all fields
-
-#### Sort Records (UC-07)
-1. Click on any column header
-2. Click again to toggle between ascending/descending
-3. Sort indicator (▲/▼) shows current sort direction
-
-#### Paginate Records (UC-05)
-1. Select entries per page (10, 25, 50, 100)
-2. Use pagination controls:
-   - First/Last: Jump to first/last page
-   - Previous/Next: Navigate one page at a time
-   - Page numbers: Click to jump to specific page
-
-## Data Entities
-
-### Students
-- ID, Name, Email, Age, Major, GPA, Enrollment Date
-
-### Courses
-- ID, Code, Name, Credits, Department, Description, Semester
-
-### Instructors
-- ID, Name, Email, Phone, Department, Office, Hire Date
-
-### Employees
-- ID, Name, Position, Office, Age, Start Date, Salary
-
-## API Endpoints
-
-json-server provides these REST endpoints:
-
-```
-GET    /students          - Get all students
-GET    /students/:id      - Get student by ID
-POST   /students          - Create new student
-PUT    /students/:id      - Update student
-DELETE /students/:id      - Delete student
+```bash
+python -m http.server 8000
+# or for Python 2
+python -m SimpleHTTPServer 8000
 ```
 
-Same pattern for `/courses`, `/instructors`, and `/employees`
+**Using Node.js:**
 
-### Query Parameters
+```bash
+npx http-server -p 8000
+```
 
-- `_page` - Page number (for pagination)
-- `_limit` - Items per page
-- `_sort` - Sort by field
-- `_order` - Sort order (asc/desc)
-- `q` - Full-text search
+**Using PHP:**
 
-Example: `http://localhost:3000/students?_page=1&_limit=10&_sort=name&_order=asc`
+```bash
+php -S localhost:8000
+```
 
-## Architecture & Design
+### Step 4: Login
 
-### Class-Based OOP Structure
+Open your web browser and go to `http://localhost:8000/login.html`.
 
-**ApiService**: Handles all HTTP requests (GET, POST, PUT, DELETE)
-- Uses Fetch API
-- Error handling
-- Returns promises
+Use the following demo credentials:
 
-**EntityConfig**: Defines schemas for each entity type
-- Field configurations
-- Validation rules
-- Display settings
+* **Username:** admin
+* **Password:** admin123
 
-**TableRenderer**: Manages table display
-- Dynamic header generation
-- Row rendering with formatting
-- Sort indicators
+---
 
-**PaginationController**: Handles pagination logic
-- Page calculations
-- Control button states
-- Page number display
+## Project Structure & Code Overview
 
-**FormHandler**: Manages add/edit forms
-- Dynamic form generation
-- Data validation
-- Form submission
+Here is a brief explanation of how the files are organized and what they do.
 
-**SearchController**: Implements search functionality
-- Debounced input
-- Query management
+**Root Files**
 
-**DataManager**: Main coordinator class
-- Orchestrates all components
-- Event handling
-- Data flow management
-- State management
+* `login.html` & `dashboard.html`: The entry points for the UI.
+* `db.json`: The mock database file.
+* `js/`: The folder containing all application logic.
 
-## Error Handling
+**JavaScript Modules (in `js/`)**
 
-The application includes comprehensive error handling:
+* **AuthService.js:** Handles the login validation and manages the browser session.
+* **DataManager.js:** The main controller. It connects the API to the UI components.
+* **ApiService.js:** Handles all HTTP requests (GET, POST, PUT, DELETE) to the backend.
+* **EntityConfig.js:** Defines the structure (schema) for students, courses, etc. If you want to add a new field, you do it here.
+* **TableRenderer.js:** Dynamically builds the HTML tables and handles sorting logic.
+* **FormHandler.js:** Manages the pop-up forms for adding and editing data.
+* **PaginationController.js:** Calculates page numbers and renders the pagination bar.
+* **SearchController.js:** Listens for user input and filters the data results.
 
-- Network errors (json-server not running)
-- Invalid data
-- Failed CRUD operations
-- User-friendly error messages
+---
 
-## Browser Compatibility
+## User Guide
 
-- Chrome (recommended)
-- Firefox
-- Safari
-- Edge
+**Navigation**
 
-Requires ES6 module support (all modern browsers).
+Once logged in, you can switch between Students, Courses, Instructors, and Employees using the tabs at the top of the dashboard.
+
+**Managing Data**
+
+* **Adding:** Click the "Add New" button in the top right. A form will appear based on the current section you are viewing.
+* **Editing:** Click the "Edit" button on any data row to modify information.
+* **Deleting:** Click the "Delete" button to remove a record.
+* **Searching:** Type in the search box to filter results. The search applies to all visible columns.
+* **Sorting:** Click any column header (e.g., "Name" or "ID") to sort the data ascending or descending.
+
+**Session Behavior**
+
+The application uses `sessionStorage`. If you close the browser tab, you will be logged out. However, if you simply refresh the page, your session is kept alive, and the app will remember exactly which page and tab you were looking at.
+
+---
+
+## Security and Architecture Notes
+
+### How Authentication Works (Demo Only)
+
+1. **Login:** When you enter credentials, `AuthService.js` compares them against hardcoded strings in the JavaScript file.
+2. **Session:** If they match, a simple object is saved to the browser's `sessionStorage`.
+3. **Protection:** When `dashboard.html` loads, it checks if this session object exists. If not, it redirects you back to the login page.
+
+### Security Warning
+
+**This system is not secure.**
+
+Because this is a frontend-only educational project, it has significant security limitations:
+
+* Credentials are stored in plain text within the JavaScript code.
+* There is no backend validation. A user could technically bypass the login by manually editing their browser storage.
+* Passwords are not encrypted.
+
+**For a Production Environment:**
+
+You must implement a real backend (using Node.js, Python, PHP, etc.) that validates credentials against a secure database, uses encrypted passwords (hashing), and issues secure session tokens (like JWTs) over HTTPS.
+
+---
 
 ## Customization
 
-### Adding New Entities
+To change the login credentials, edit `js/AuthService.js`:
 
-1. Add entity configuration in `EntityConfig.js`
-2. Add tab button in `index.html`
-3. Add data to `db.json`
-
-### Modifying Field Configurations
-
-Edit the `EntityConfig.js` file to:
-- Add/remove fields
-- Change field types
-- Modify validation rules
-- Update display settings
-
-
-# Implementation Details:
-## Architecture Overview:
-```
-User Interface (HTML)
-        ↓
-    DataManager (Coordinator)
-        ↓
-    ┌───┴───┬────────┬──────────┬─────────┐
-    ↓       ↓        ↓          ↓         ↓
-ApiService  Table    Pagination Form     Search
-            Renderer Controller Handler Controller
-```
-The project uses Class-Based OOP with ES6 Modules. Each class follows the Single Responsibility Principle - one class, one job.
-
-
-##  Complete Data Flow Examples
-
-### Example 1: User Searches for "John"
-```
-1. User types "john"
-   ↓
-2. SearchController (debounce 500ms)
-   ↓
-3. SearchController calls callback: dataManager.currentSearch = "john"
-   ↓
-4. DataManager.loadData()
-   ↓
-5. Build params: { _page: 1, _limit: 25, q: "john" }
-   ↓
-6. ApiService.getAll('students', params)
-   ↓
-7. Fetch: GET http://localhost:3000/students?_page=1&_limit=25&q=john
-   ↓
-8. json-server returns filtered data
-   ↓
-9. TableRenderer.renderRows(filteredData)
-   ↓
-10. PaginationController.update(filteredTotal)
-   ↓
-11. UI updates with search results
+```javascript
+this.validCredentials = {
+    username: 'new_username',
+    password: 'new_password'
+};
 ```
 
-### Example 2: User Edits a Student
-```
-1. User clicks Edit button (data-id="5")
-   ↓
-2. TableRenderer triggers callback: onEdit(5)
-   ↓
-3. DataManager.handleEdit(5)
-   ↓
-4. ApiService.getById('students', 5)
-   ↓
-5. Fetch: GET http://localhost:3000/students/5
-   ↓
-6. Returns student data: { id: 5, name: "David Wilson", ... }
-   ↓
-7. FormHandler.showEditForm('students', record, callback)
-   ↓
-8. FormHandler.renderForm() - generates form fields
-   ↓
-9. FormHandler.populateForm(record) - fills with data
-   ↓
-10. Modal displayed with pre-filled form
-   ↓
-11. User modifies name to "David Wilson Jr."
-   ↓
-12. User clicks Save
-   ↓
-13. FormHandler.getFormData() - extracts form data
-   ↓
-14. FormHandler triggers callback: onSubmit(formData)
-   ↓
-15. DataManager.handleUpdate(formData)
-   ↓
-16. ApiService.update('students', 5, formData)
-   ↓
-17. Fetch: PUT http://localhost:3000/students/5
-        Body: { id: 5, name: "David Wilson Jr.", ... }
-   ↓
-18. json-server updates record
-   ↓
-19. DataManager.loadData() - refresh table
-   ↓
-20. Updated data displayed in table
-```
+To add new fields to the tables (like a "Phone Number" for students), edit `js/EntityConfig.js` and ensure your `db.json` has the matching data.
 
-### Example 3: User Sorts by Name
-```
-1. User clicks "Name" column header
-   ↓
-2. TableRenderer.updateSortIndicators()
-   ↓
-3. Sets currentSort: { field: "name", order: "asc" }
-   ↓
-4. TableRenderer triggers callback: onSort("name", "asc")
-   ↓
-5. DataManager.handleSort("name", "asc")
-   ↓
-6. Sets currentSort state
-   ↓
-7. Resets to page 1
-   ↓
-8. DataManager.loadData()
-   ↓
-9. Build params: { _page: 1, _limit: 25, _sort: "name", _order: "asc" }
-   ↓
-10. ApiService.getAll('students', params)
-   ↓
-11. Fetch: GET http://localhost:3000/students?_page=1&_limit=25&_sort=name&_order=asc
-   ↓
-12. json-server returns sorted data
-   ↓
-13. TableRenderer.renderRows(sortedData)
-   ↓
-14. Table displays with ▲ indicator on Name column
