@@ -15,12 +15,12 @@ The project is strictly educational. It avoids modern frameworks (like React or 
 ### Login:
 ---
 <img src="./video/login.gif" alt="Login GIF" width="720">
----
+
 
 ### Website functionality:
 ---
-<img src="./video/video_tut_gif.gif" alt="Website Functionality GIF" width="720">
----
+<img src="./video/video_tut.gif" alt="Website Functionality GIF" width="720">
+
 
 ---
 
