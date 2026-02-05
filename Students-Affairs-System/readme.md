@@ -8,10 +8,16 @@ The project is strictly educational. It avoids modern frameworks (like React or 
 
 **Important:** This project includes a login system for demonstration purposes. It is **frontend-only** and is not secure for production use. Please read the Security Notes section for more details.
 
----
+
 ## DEMO
 
-![Demo GIF](./video/demo.gif)
+
+login:
+---
+
+website functionality:
+---
+![Demo GIF](./video/video_tut_gif.gif)
 ---
 
 ---
