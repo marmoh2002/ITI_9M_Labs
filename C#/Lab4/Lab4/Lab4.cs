@@ -380,9 +380,9 @@ namespace Lecture04Tasks
 
         public int Age
         {
-            get
-            {
-                return age;
+            get 
+            { 
+                return age; 
             }
             set
             {
@@ -405,9 +405,9 @@ namespace Lecture04Tasks
 
         public double GPA
         {
-            get
-            {
-                return gpa;
+            get 
+            { 
+                return gpa; 
             }
             set
             {
@@ -616,7 +616,7 @@ namespace Lecture04Tasks
             shapes[0] = new Circle(5);
             shapes[1] = new Rectangle(4, 6);
             shapes[2] = new Triangle(3, 4, 5);
-            for (int i = 0; i < shapes.Length; i++)
+            for(int i=0; i<shapes.Length; i++)
             {
                 Console.WriteLine("Area: " + shapes[i].CalculateArea());
                 Console.WriteLine("Perimeter: " + shapes[i].CalculatePerimeter());
