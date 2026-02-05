@@ -1,7 +1,7 @@
 {
   "students": [
     {
-      "name": "John Smithh",
+      "name": "John Smith",
       "email": "john.smith@university.ed4",
       "age": 20,
       "major": "Computer Science",
@@ -176,13 +176,13 @@
       "hireDate": "2012-01-10"
     },
     {
-      "id": 3,
       "name": "Dr. Marcus Williams",
       "email": "marcus.williams@university.edu",
       "phone": "+1-555-0103",
-      "department": "Business",
+      "department": "Business2",
       "office": "Building C, Room 401",
-      "hireDate": "2018-09-01"
+      "hireDate": "2018-09-01",
+      "id": 3
     },
     {
       "name": "Prof. Linda Rodrigues",
@@ -214,7 +214,7 @@
   ],
   "employees": [
     {
-      "name": "Angelica Ramos Mendes",
+      "name": "Angelica Ramos",
       "position": "Chief Executive Officer (CEO)",
       "office": "London",
       "age": 47,
@@ -311,15 +311,6 @@
       "age": 39,
       "startDate": "2009-09-15",
       "salary": 205500
-    },
-    {
-      "id": 13,
-      "name": "Dai Rios",
-      "position": "Personnel Lead",
-      "office": "Edinburgh",
-      "age": 35,
-      "startDate": "2012-09-26",
-      "salary": 217500
     },
     {
       "id": 14,

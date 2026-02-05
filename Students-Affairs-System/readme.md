@@ -12,10 +12,11 @@ The project is strictly educational. It avoids modern frameworks (like React or 
 ## DEMO
 
 
-login:
+### Login:
 ---
+![Login GIF](./video/login.gif)
 
-website functionality:
+### Website functionality:
 ---
 ![Demo GIF](./video/video_tut_gif.gif)
 ---
