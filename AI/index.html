@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuickSort Visualizer</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>🔄 QuickSort Algorithm Visualizer</h1>
+            <p class="subtitle">Enter numbers to sort them using QuickSort</p>
+        </header>
+
+        <main>
+            <!-- Input Section -->
+            <section class="input-section">
+                <div class="input-group">
+                    <label for="numberInput">Enter numbers (comma-separated):</label>
+                    <input type="text" id="numberInput" placeholder="e.g., 64, 34, 25, 12, 22, 11, 90"
+                        class="input-field">
+                    <small>Tip: You can enter integers separated by commas or spaces</small>
+                </div>
+
+                <!-- Buttons -->
+                <div class="button-group">
+                    <button id="sortBtn" class="btn btn-primary">Sort with QuickSort</button>
+                    <button id="clearBtn" class="btn btn-secondary">Clear All</button>
+                    <button id="randomBtn" class="btn btn-tertiary">Random Numbers</button>
+                </div>
+            </section>
+
+            <!-- Statistics Section -->
+            <section class="stats-section" id="statsSection" style="display: none;">
+                <h3>Algorithm Statistics</h3>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <span class="stat-label">Elements Count</span>
+                        <span class="stat-value" id="elementCount">0</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-label">Comparisons</span>
+                        <span class="stat-value" id="comparisons">0</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-label">Swaps</span>
+                        <span class="stat-value" id="swaps">0</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-label">Time (ms)</span>
+                        <span class="stat-value" id="executionTime">0</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Visualization Section -->
+            <section class="visualization-section">
+                <h3>Input Array Visualization</h3>
+                <div id="inputVisualization" class="visualization-container">
+                    <p class="placeholder">Enter numbers to see visualization</p>
+                </div>
+            </section>
+
+            <!-- Results Section -->
+            <section class="results-section" id="resultsSection" style="display: none;">
+                <h3>Sorted Array Result</h3>
+                <div id="outputVisualization" class="visualization-container result-container"></div>
+
+                <div class="result-info">
+                    <div class="info-card">
+                        <h4>Input Array</h4>
+                        <p id="inputArray" class="array-display"></p>
+                    </div>
+                    <div class="info-card">
+                        <h4>Sorted Array</h4>
+                        <p id="sortedArray" class="array-display"></p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Error Section -->
+            <section id="errorSection" style="display: none;">
+                <div class="error-message" id="errorMessage"></div>
+            </section>
+        </main>
+
+        <footer>
+            <p>Time Complexity: O(n log n) average case | Space Complexity: O(log n) for recursion stack</p>
+            <p>Built with HTML5, CSS3, and Vanilla JavaScript</p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
